@@ -10,4 +10,7 @@ docker-mqtt-down:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down
 
 mqtt-start:
-	cd $(MQTT_DIR) && ./start.sh
+	cd $(MQTT_DIR) && npm run start:dev 
+
+mqtt-install:
+	cd $(MQTT_DIR) && npm install
