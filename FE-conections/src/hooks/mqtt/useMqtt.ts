@@ -49,6 +49,7 @@ const useMqtt = (subscription: string) => {
       }
     };
   }, [subscription]);
+  console.log(data);
   return { data };
 };
 
