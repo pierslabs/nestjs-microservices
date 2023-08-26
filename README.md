@@ -113,7 +113,7 @@ Packet:  Packet {
 ### Terminal cmd pub
 
 ```bash
-╭─    ~ ──────────────────────────────────────────────── ✔  23:09:25  ─╮
+╭───────────────────────────────────────────────── ✔  23:09:25  ─╮
 ╰─ docker exec -it mqtt5 mosquitto_pub -h localhost -t ftf-output -q 1 -d -m 'hola'
 Client null sending CONNECT
 Client null received CONNACK (0)

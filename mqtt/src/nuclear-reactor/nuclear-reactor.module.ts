@@ -1,26 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { NuclearReactorService } from './nuclear-reactor.service';
+import { NuclearReactorController } from './nuclear-reactor.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ScheduleModule } from '@nestjs/schedule';
-import { NuclearReactorModule } from './nuclear-reactor/nuclear-reactor.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     ClientsModule.register([
       {
-        name: 'TEST_CLIENT',
+        name: 'TEST_REACTOR',
         transport: Transport.MQTT,
         options: {
           subscribeOptions: { qos: 1 },
-          url: 'mqtt://localhost:1883',
+          url: 'mqtt://127.0.0.1:1883',
         },
       },
     ]),
-    NuclearReactorModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [NuclearReactorController],
+  providers: [NuclearReactorService],
 })
-export class AppModule {}
+export class NuclearReactorModule {}
