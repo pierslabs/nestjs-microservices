@@ -17,6 +17,11 @@ export class NuclearReactorService {
     });
   }
 
+  @Cron(CronExpression.EVERY_5_SECONDS)
+  powerLevelCron() {
+    this.powerLevel();
+  }
+
   airFlowVentilation() {
     const min = 0.1;
     const max = 5;
@@ -27,6 +32,12 @@ export class NuclearReactorService {
       console.log(`Response airFlowVentilation output: < ${res} >`);
     });
   }
+
+  @Cron('*/2 * * * * *')
+  airFlowVentilationCron() {
+    this.airFlowVentilation();
+  }
+
   coolingSytem() {
     const random = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
     const airFlow = {
@@ -38,22 +49,30 @@ export class NuclearReactorService {
       console.log(`Response coolingSytem output: < ${res} >`);
     });
   }
-
-  temperatureLevel() {
-    return console.log('temperatureLevel');
-  }
-
-  @Cron(CronExpression.EVERY_5_SECONDS)
-  handleCron() {
-    this.powerLevel();
-  }
-
-  @Cron('*/2 * * * * *')
-  handleCron2() {
-    this.airFlowVentilation();
-  }
   @Cron('* * * * * *')
-  handleCron3() {
+  coolingSytemCron() {
     this.coolingSytem();
+  }
+
+  // : 0.2 µSv/h a 1.5 µSv/h
+
+  radioactiveContamination() {
+    const min = 0.2;
+    const max = 1.5;
+
+    const radioactiveContamination = randomUnits(min, max, 'µSv/h');
+    const record = new MqttRecordBuilder(radioactiveContamination)
+      .setQoS(1)
+      .build();
+    this.client
+      .send('radioactiveContamination-out', record)
+      .subscribe((res) => {
+        console.log(`Response radioactiveContamination output: < ${res} >`);
+      });
+  }
+
+  @Cron('*/7 * * * * *')
+  radioactiveContaminationCron() {
+    this.radioactiveContamination();
   }
 }

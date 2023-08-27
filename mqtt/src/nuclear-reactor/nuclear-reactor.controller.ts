@@ -51,6 +51,7 @@ export class NuclearReactorController {
     this.logger.log(`Packet: `, context.getPacket());
     return `response from logAirFlowVentilation() in -t ${context.getTopic()}`;
   }
+
   // coolngSystem is a message pattern
   @MessagePattern('coolingSytem')
   coolingSytem(@Ctx() context: MqttContext) {
@@ -67,5 +68,26 @@ export class NuclearReactorController {
     this.logger.log(`payload: ${payload}`);
     this.logger.log(`Packet: `, context.getPacket());
     return `response from logCoolingSytem() in -t ${context.getTopic()}`;
+  }
+
+  // radioactiveContamination is a message pattern
+  @MessagePattern('radioactiveContamination')
+  radioactiveContamination(@Ctx() context: MqttContext) {
+    this.logger.log(
+      `NEW MESSAGE RECEIVED FROM NUCLEAR-REACTOR: ${context.getTopic()}`,
+    );
+    this.logger.log(`context: `, context.getPacket());
+    return this.nuclearReactorService.radioactiveContamination();
+  }
+
+  @MessagePattern('radioactiveContamination-out')
+  logRadioactiveContamination(
+    @Payload() payload: string,
+    @Ctx() context: MqttContext,
+  ) {
+    this.logger.log(`NEW MESSAGE RECEIVED: ${context.getTopic()}`);
+    this.logger.log(`payload: ${payload}`);
+    this.logger.log(`Packet: `, context.getPacket());
+    return `response from logRadioactiveContamination() in -t ${context.getTopic()}`;
   }
 }

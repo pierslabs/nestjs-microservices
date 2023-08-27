@@ -19,7 +19,6 @@ const PowerLevel: FC = () => {
   ]);
 
   useEffect(() => {
-    console.log('entra');
     if (data && data.data.unit === 'MW') {
       if (messages.length > 5) {
         messages.shift();

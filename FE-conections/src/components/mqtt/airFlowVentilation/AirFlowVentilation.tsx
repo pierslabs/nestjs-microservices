@@ -12,8 +12,6 @@ const AirFlowVentilation: FC = () => {
 
   const valuePercentage = (value / 5) * 100;
 
-  console.log({ airFlowState });
-
   useEffect(() => {
     if (data?.data.unit === 'm³/s') setAirFlowState(data);
   }, [data]);
@@ -21,7 +19,7 @@ const AirFlowVentilation: FC = () => {
   return (
     <div className='border w-full h-full p-5 overflow-hidden'>
       <MeasurementComponent
-        name='Flujo de Aire y Ventilación'
+        name='Air Flow Ventilation'
         value={value.toFixed(2) as unknown as number}
         unit={unit}
       />

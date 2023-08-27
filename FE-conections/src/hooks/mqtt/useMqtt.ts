@@ -26,9 +26,7 @@ const useMqtt = ({ subscription }: UseMqttProps) => {
     });
 
     mqttClient.on('message', (topic, message) => {
-      console.log(`Mensaje recibido en el tema  ${message.toString()}`, topic);
       const messageToJson = JSON.parse(message.toString());
-
       setData(messageToJson);
     });
 

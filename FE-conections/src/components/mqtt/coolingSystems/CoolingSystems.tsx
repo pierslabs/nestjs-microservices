@@ -18,7 +18,7 @@ const CoolingSystems: FC = () => {
   return (
     <div className='p-5 border w-full h-full'>
       <div className='flex justify-between items-center'>
-        <MeasurementComponent name='Sistemas de Enfriamiento' />
+        <MeasurementComponent name='Cooling Systems' />
         <div
           className={` w-5 h-5 rounded-full ${
             active ? 'bg-green-600' : 'bg-red-600'
