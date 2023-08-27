@@ -1,15 +1,25 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import mqttClient from '../../config/mqtt/mqtt.config';
 
 export interface Message {
-  id: string;
-  unit: string;
-  value: number;
+  id: string
+  pattern:string,
+  data: {
+    unit: string,
+    value: number  }
 }
 
-const useMqtt = (subscription: string) => {
+interface UseMqttProps {
+  subscription: string,
+  array?: boolean
+}
+
+
+const useMqtt = ({subscription, array}: UseMqttProps ) => {
   const [data, setData] = useState<Message[]>([]);
+
+  
 
   useEffect(() => {
     mqttClient.on('connect', () => {
@@ -22,22 +32,31 @@ const useMqtt = (subscription: string) => {
       console.log(`Mensaje recibido en el tema  ${message.toString()}`, topic);
       const messageToJson = JSON.parse(message.toString());
 
-      setData((prevData) => {
-        const newData = [
-          ...prevData,
-          {
-            id: messageToJson.id,
-            unit: messageToJson.data.unit,
-            value: messageToJson.data.value,
-          },
-        ];
+      if(array) {
+        setData((prevData) => {
+          const newData = [
+            ...(prevData as Message[]),
+            {
+              id: messageToJson.id,
+              pattern: messageToJson.pattern,
+              data: {
+                unit: messageToJson.data.unit,
+                value: messageToJson.data.value,
+              }
+            },
+          ];
+  
+          if (newData.length > 15) {
+            return newData.slice(1);
+          }
+  
+          return newData;
+        });
+      } 
+      if(!array)  {
+        setData(messageToJson);
+      }
 
-        if (newData.length > 15) {
-          return newData.slice(1);
-        }
-
-        return newData;
-      });
     });
 
     // Manejo de la limpieza al desmontar el componente
@@ -48,8 +67,8 @@ const useMqtt = (subscription: string) => {
         });
       }
     };
-  }, [subscription]);
-  console.log(data);
+  }, [array, subscription]);
+
   return { data };
 };
 
