@@ -27,6 +27,17 @@ export class NuclearReactorService {
       console.log(`Response airFlowVentilation output: < ${res} >`);
     });
   }
+  coolingSytem() {
+    const random = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
+    const airFlow = {
+      unit: '%',
+      value: random,
+    };
+    const record = new MqttRecordBuilder(airFlow).setQoS(1).build();
+    this.client.send('coolingSytem-out', record).subscribe((res) => {
+      console.log(`Response coolingSytem output: < ${res} >`);
+    });
+  }
 
   temperatureLevel() {
     return console.log('temperatureLevel');
@@ -34,8 +45,15 @@ export class NuclearReactorService {
 
   @Cron(CronExpression.EVERY_5_SECONDS)
   handleCron() {
-    console.log('Called every 5 seconds');
     this.powerLevel();
+  }
+
+  @Cron('*/2 * * * * *')
+  handleCron2() {
     this.airFlowVentilation();
+  }
+  @Cron('* * * * * *')
+  handleCron3() {
+    this.coolingSytem();
   }
 }

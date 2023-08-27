@@ -1,25 +1,22 @@
 /* eslint-disable no-console */
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import mqttClient from '../../config/mqtt/mqtt.config';
 
 export interface Message {
-  id: string
-  pattern:string,
+  id: string;
+  pattern: string;
   data: {
-    unit: string,
-    value: number  }
+    unit: string;
+    value: number;
+  };
 }
 
 interface UseMqttProps {
-  subscription: string,
-  array?: boolean
+  subscription: string;
 }
 
-
-const useMqtt = ({subscription, array}: UseMqttProps ) => {
-  const [data, setData] = useState<Message[]>([]);
-
-  
+const useMqtt = ({ subscription }: UseMqttProps) => {
+  const [data, setData] = useState<Message>();
 
   useEffect(() => {
     mqttClient.on('connect', () => {
@@ -32,31 +29,7 @@ const useMqtt = ({subscription, array}: UseMqttProps ) => {
       console.log(`Mensaje recibido en el tema  ${message.toString()}`, topic);
       const messageToJson = JSON.parse(message.toString());
 
-      if(array) {
-        setData((prevData) => {
-          const newData = [
-            ...(prevData as Message[]),
-            {
-              id: messageToJson.id,
-              pattern: messageToJson.pattern,
-              data: {
-                unit: messageToJson.data.unit,
-                value: messageToJson.data.value,
-              }
-            },
-          ];
-  
-          if (newData.length > 15) {
-            return newData.slice(1);
-          }
-  
-          return newData;
-        });
-      } 
-      if(!array)  {
-        setData(messageToJson);
-      }
-
+      setData(messageToJson);
     });
 
     // Manejo de la limpieza al desmontar el componente
@@ -67,7 +40,7 @@ const useMqtt = ({subscription, array}: UseMqttProps ) => {
         });
       }
     };
-  }, [array, subscription]);
+  }, []);
 
   return { data };
 };

@@ -3,11 +3,11 @@ import MeasurementComponent from '../measurement/Measurement';
 
 const RadioactiveContamination: FC = () => {
   return (
-    <div className='measurement-container'>
+    <div className='p-5 border w-full h-full '>
       <MeasurementComponent
-        nombre='Niveles de Contaminación Radiactiva'
-        valor={3}
-        unidad={'μSv/h'}
+        name='Niveles de Contaminación Radiactiva'
+        value={3}
+        unit={'μSv/h'}
       />
     </div>
   );

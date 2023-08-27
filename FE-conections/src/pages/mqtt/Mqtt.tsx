@@ -14,18 +14,20 @@ import ReactorControlParameters from '../../components/mqtt/reactorControlParame
 
 export const MQTT: FC = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-center p-5'>
       <PowerLevel />
-      <AirFlowVentilation />
+      <div className='flex flex-col h-full gap-3'>
+        <EmergencySystemsAlarms />
+        <AirFlowVentilation />
+        <RadioactiveContamination />
+      </div>
       <CoolingSystems />
-      <EmergencySystemsAlarms />
       <ExternalEnvironmentalConditions />
       <FireProtectionSystems />
       <HazardousChemicals />
       <NuclearFuelState />
       <PressureTemperature />
       <Radiation />
-      <RadioactiveContamination />
       <ReactorControlParameters />
     </div>
   );
