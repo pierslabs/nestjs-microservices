@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
 import useMqtt, { Message } from '../../../hooks/mqtt/useMqtt';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const RadioactiveContamination: FC = () => {
   const { data } = useMqtt({ subscription: 'radioactiveContamination-out' });
@@ -29,7 +30,7 @@ const RadioactiveContamination: FC = () => {
   };
 
   return (
-    <div className='p-5 border w-full h-full '>
+    <GridItemWraper>
       <div className='flex justify-between items-start'>
         <MeasurementComponent
           name='Radioactive Contamination'
@@ -40,7 +41,7 @@ const RadioactiveContamination: FC = () => {
           className={` w-5 h-5 rounded-full ${contaminationColor(value)} `}
         />
       </div>
-    </div>
+    </GridItemWraper>
   );
 };
 

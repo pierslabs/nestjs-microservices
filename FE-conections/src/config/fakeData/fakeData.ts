@@ -1,11 +1,11 @@
 export interface Measurement {
-  nombre: string,
-  valor: number,
-  unidad: string,
+  name: string,
+  value: number,
+  unit: string,
 }
 
 export const measurements:Measurement[] = [{
-  nombre: 'Temperatura',
-  valor: 20,
-  unidad: '°C',    
+  name: 'Temperatura',
+  value: 20,
+  unit: '°C',    
 }]

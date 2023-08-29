@@ -1,28 +1,29 @@
 import { FC } from 'react';
 import { Measurement, measurements } from '../../../config/fakeData/fakeData';
 import MeasurementComponent from '../measurement/Measurement';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const PressureTemperature: FC = () => {
   const pressureMeasurement: Measurement | undefined = measurements.find(
-    (m) => m.nombre === 'Presión'
-  ) ?? { nombre: '', valor: 0, unidad: '' };
+    (m) => m.name === 'Presión'
+  ) ?? { name: '', value: 0, unit: '' };
   const temperatureMeasurement: Measurement | undefined = measurements.find(
-    (m) => m.nombre === 'Temperatura'
-  ) ?? { nombre: '', valor: 0, unidad: '' };
+    (m) => m.name === 'Temperatura'
+  ) ?? { name: '', value: 0, unit: '' };
 
   return (
-    <div className='measurement-container'>
+    <GridItemWraper>
       <MeasurementComponent
-        nombre={pressureMeasurement.nombre}
-        valor={pressureMeasurement.valor}
-        unidad={pressureMeasurement.unidad}
+        name={pressureMeasurement.name}
+        value={pressureMeasurement.value}
+        unit={pressureMeasurement.unit}
       />
       <MeasurementComponent
-        nombre={temperatureMeasurement.nombre}
-        valor={temperatureMeasurement.valor}
-        unidad={temperatureMeasurement.unidad}
+        name={temperatureMeasurement.name}
+        value={temperatureMeasurement.value}
+        unit={temperatureMeasurement.unit}
       />
-    </div>
+    </GridItemWraper>
   );
 };
 

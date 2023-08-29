@@ -1,17 +1,18 @@
 import { FC } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const ReactorControlParameters: FC = () => {
   // Add your logic to find the measurement for reactor control parameters
 
   return (
-    <div className='measurement-container'>
+    <GridItemWraper>
       <MeasurementComponent
-        nombre='Parámetros de Control del Reactor'
-        valor={56}
-        unidad={'%'}
+        name='Parámetros de Control del Reactor'
+        value={56}
+        unit={'%'}
       />
-    </div>
+    </GridItemWraper>
   );
 };
 

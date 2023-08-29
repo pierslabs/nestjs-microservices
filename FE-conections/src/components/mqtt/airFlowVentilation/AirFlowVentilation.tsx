@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
 import useMqtt, { Message } from '../../../hooks/mqtt/useMqtt';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const AirFlowVentilation: FC = () => {
   const topic = 'airFlowVentilation-out';
@@ -17,7 +18,7 @@ const AirFlowVentilation: FC = () => {
   }, [data]);
 
   return (
-    <div className='border w-full h-full p-5 overflow-hidden'>
+    <GridItemWraper>
       <MeasurementComponent
         name='Air Flow Ventilation'
         value={value.toFixed(2) as unknown as number}
@@ -30,7 +31,7 @@ const AirFlowVentilation: FC = () => {
           style={{ width: `${valuePercentage}%` }}
         ></div>
       </div>
-    </div>
+    </GridItemWraper>
   );
 };
 

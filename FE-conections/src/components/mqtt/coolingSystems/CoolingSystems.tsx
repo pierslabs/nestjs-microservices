@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
 import useMqtt from '../../../hooks/mqtt/useMqtt';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const CoolingSystems: FC = () => {
   const { data } = useMqtt({ subscription: 'coolingSytem-out' });
@@ -16,7 +17,7 @@ const CoolingSystems: FC = () => {
   }, [data]);
 
   return (
-    <div className='p-5 border w-full h-full'>
+    <GridItemWraper>
       <div className='flex justify-between items-center'>
         <MeasurementComponent name='Cooling Systems' />
         <div
@@ -30,7 +31,7 @@ const CoolingSystems: FC = () => {
       <div className='flex justify-center h-52 items-center gap-10 my-6'>
         <h1 className='text-7xl'>{active} %</h1>
       </div>
-    </div>
+    </GridItemWraper>
   );
 };
 

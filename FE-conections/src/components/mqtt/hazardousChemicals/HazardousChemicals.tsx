@@ -1,17 +1,18 @@
 import { FC } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const HazardousChemicals: FC = () => {
   // Add your logic to find the measurement for hazardous chemicals
 
   return (
-    <div className='measurement-container'>
+    <GridItemWraper>
       <MeasurementComponent
-        nombre='Presencia de Gases o Químicos Peligrosos'
-        valor={78}
-        unidad={'%'}
+        name='Presencia de Gases o Químicos Peligrosos'
+        value={78}
+        unit={'%'}
       />
-    </div>
+    </GridItemWraper>
   );
 };
 

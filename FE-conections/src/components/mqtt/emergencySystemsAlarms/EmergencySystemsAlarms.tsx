@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import MeasurementComponent from '../measurement/Measurement';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const EmergencySystemsAlarms = () => {
   const [active, setActive] = useState<boolean>(true);
@@ -10,7 +11,7 @@ const EmergencySystemsAlarms = () => {
   };
 
   return (
-    <div className='measurement-container p-5 border w-full h-full '>
+    <GridItemWraper>
       <div className='flex justify-between items-center w-full h-full'>
         <MeasurementComponent name='Emergency Systems Alarms' />
         <div
@@ -20,7 +21,7 @@ const EmergencySystemsAlarms = () => {
           onClick={handleActive}
         />
       </div>
-    </div>
+    </GridItemWraper>
   );
 };
 

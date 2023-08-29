@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import useMqtt from '../../../hooks/mqtt/useMqtt';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 interface Messages {
   id: string;
@@ -31,7 +32,7 @@ const PowerLevel: FC = () => {
   }, [data && data.data.unit === 'MW']);
 
   return (
-    <div className='border w-full h-full p-5'>
+    <GridItemWraper>
       <h1>Power Level Generate</h1>
 
       <ResponsiveContainer width={'80%'} height={'90%'}>
@@ -53,7 +54,7 @@ const PowerLevel: FC = () => {
           <YAxis />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </GridItemWraper>
   );
 };
 

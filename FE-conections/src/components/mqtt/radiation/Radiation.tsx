@@ -1,20 +1,21 @@
 import { FC } from 'react';
 import { measurements } from '../../../config/fakeData/fakeData';
 import MeasurementComponent from '../measurement/Measurement';
+import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
 
 const Radiation: FC = () => {
   const radiationMeasurement = measurements.find(
-    (m) => m.nombre === 'Radiación'
-  ) ?? { nombre: '', valor: 0, unidad: '' };
+    (m) => m.name === 'Radiación'
+  ) ?? { name: '', value: 0, unit: '' };
 
   return (
-    <div className='measurement-container'>
+    <GridItemWraper>
       <MeasurementComponent
-        nombre={radiationMeasurement.nombre}
-        valor={radiationMeasurement.valor}
-        unidad={radiationMeasurement.unidad}
+        name={radiationMeasurement.name}
+        value={radiationMeasurement.value}
+        unit={radiationMeasurement.unit}
       />
-    </div>
+    </GridItemWraper>
   );
 };
 
