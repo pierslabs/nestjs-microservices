@@ -11,24 +11,41 @@ import PressureTemperature from '../../components/mqtt/pressureTemperature/Press
 import Radiation from '../../components/mqtt/radiation/Radiation';
 import RadioactiveContamination from '../../components/mqtt/radioactiveContamination/RadioactiveContamination';
 import ReactorControlParameters from '../../components/mqtt/reactorControlParameters/ReactorControlParameters';
-
+import './mqtt.styles.css';
 export const MQTT: FC = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-center p-5'>
-      <PowerLevel />
-      <div className='flex flex-col h-full gap-3'>
-        <EmergencySystemsAlarms />
-        <AirFlowVentilation />
-        <RadioactiveContamination />
+    <div className='wrapper'>
+      <div className='one'>
+        <PowerLevel />
       </div>
-      <CoolingSystems />
-      <ExternalEnvironmentalConditions />
-      <FireProtectionSystems />
-      <HazardousChemicals />
-      <NuclearFuelState />
-      <PressureTemperature />
-      <Radiation />
-      <ReactorControlParameters />
+
+      <div className='two'>
+        <ExternalEnvironmentalConditions />
+      </div>
+      <div className='three'>
+        <div className='flex flex-col gap-3'>
+          <EmergencySystemsAlarms />
+          <AirFlowVentilation />
+          <RadioactiveContamination />
+        </div>
+      </div>
+      <div className='four'>
+        <CoolingSystems />
+      </div>
+      <div className='five'>
+        <Radiation />
+      </div>
+      <div>
+        <ReactorControlParameters />
+      </div>
+      <div className='six'>
+        <div>
+          <FireProtectionSystems />
+          <HazardousChemicals />
+          <NuclearFuelState />
+          <PressureTemperature />
+        </div>
+      </div>
     </div>
   );
 };
