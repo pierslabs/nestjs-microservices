@@ -35,13 +35,15 @@ const PowerLevel: FC = () => {
     <GridItemWraper>
       <h1>Power Level Generate</h1>
 
-      <ResponsiveContainer width={'80%'} height={'90%'}>
+      <ResponsiveContainer>
         <LineChart
           width={700}
           height={400}
           data={messages}
           margin={{ top: 70, right: 20, left: 10, bottom: 5 }}
-          style={{ position: !data ? 'absolute' : 'relative' }}
+          style={{
+            position: !data ? 'absolute' : 'relative',
+          }}
         >
           <Line
             isAnimationActive={true}
@@ -50,7 +52,7 @@ const PowerLevel: FC = () => {
             stroke='#8884d8'
             dot={false}
           />
-          <XAxis dataKey='' />
+          <XAxis />
           <YAxis />
         </LineChart>
       </ResponsiveContainer>

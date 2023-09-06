@@ -3,6 +3,14 @@
 @tailwind utilities;
 body {
   line-height: 1.7;
-  background-color: rgb(34, 34, 34);
+  background-color: rgb(53, 53, 53);
   color: rgb(146, 146, 146);
+  overflow-x: hidden;
+}
+
+.btn-gradient-1 {
+  background: linear-gradient(rgb(61, 61, 61), rgb(0, 0, 0)) padding-box,
+    linear-gradient(to right, darkblue, darkorchid) border-box;
+  border-radius: 10px;
+  border: 1px solid transparent;
 }

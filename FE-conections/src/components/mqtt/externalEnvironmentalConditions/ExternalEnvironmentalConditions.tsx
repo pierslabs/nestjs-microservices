@@ -8,10 +8,10 @@ const ExternalEnvironmentalConditions: FC = () => {
     externalEnvironmentData;
   return (
     <GridItemWraper>
-      <div className='measurement-container'>
+      <div className='measurement-container max-h-full overflow-y-auto'>
         <MeasurementComponent name='External Environmental Conditions' />
 
-        <div className='flex flex-wrap justify-evenly'>
+        <div className='flex flex-wrap  w-full justify-between '>
           <div className='mb-6'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Air Quality
@@ -40,23 +40,18 @@ const ExternalEnvironmentalConditions: FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-wrap justify-evenly gap-9'>
-          <div className='mb-6'>
+        <div className='flex flex-wrap  w-full justify-between w-full'>
+          <div className='mb-6 '>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Water Quality
             </h3>
             <ul>
-              <li>Water Temperature: {waterQuality.waterTemperature} °C</li>
+              <li>Temperature: {waterQuality.waterTemperature} °C</li>
               <li>pH: {waterQuality.pH}</li>
               <li>Dissolved Oxygen: {waterQuality.dissolvedOxygen} mg/L</li>
-              <li>
-                Nitrate Concentration: {waterQuality.nitrateConcentration} mg/L
-              </li>
-              <li>
-                Phosphate Concentration: {waterQuality.phosphateConcentration}{' '}
-                mg/L
-              </li>
-              <li>Mercury Level: {waterQuality.mercuryLevel} µg/L</li>
+              <li>Nitrate: {waterQuality.nitrateConcentration} mg/L</li>
+              <li>Phosphate: {waterQuality.phosphateConcentration} mg/L</li>
+              <li>Mercury: {waterQuality.mercuryLevel} µg/L</li>
             </ul>
           </div>
           <div>
@@ -64,13 +59,9 @@ const ExternalEnvironmentalConditions: FC = () => {
               Resource Usage
             </h3>
             <ul>
-              <li>
-                Water Consumption: {resourceUsage.waterConsumption} m³/day
-              </li>
-              <li>
-                Energy Consumption: {resourceUsage.energyConsumption} MWh/month
-              </li>
-              <li>Waste Generation: {resourceUsage.wasteGeneration} kg/day</li>
+              <li>Water : {resourceUsage.waterConsumption} m³/day</li>
+              <li>Energy : {resourceUsage.energyConsumption} MWh/month</li>
+              <li>W. Generation: {resourceUsage.wasteGeneration} kg/day</li>
               <li>Land Use Change: {resourceUsage.landUseChange} acres/year</li>
             </ul>
           </div>
