@@ -33,18 +33,23 @@ export const MQTT: FC = () => {
         <CoolingSystems />
       </div>
       <div className='five'>
-        <Radiation />
+        <FireProtectionSystems />
+      </div>
+      <div className='six'>
+        <NuclearFuelState />
+      </div>
+      <div className='seven'>
+        <HazardousChemicals />
+      </div>
+
+      <div className=''>
+        <div>
+          <Radiation />
+          <PressureTemperature />
+        </div>
       </div>
       <div>
         <ReactorControlParameters />
-      </div>
-      <div className='six'>
-        <div>
-          <FireProtectionSystems />
-          <HazardousChemicals />
-          <NuclearFuelState />
-          <PressureTemperature />
-        </div>
       </div>
     </div>
   );

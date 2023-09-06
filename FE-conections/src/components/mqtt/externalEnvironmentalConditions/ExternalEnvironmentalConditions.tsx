@@ -21,11 +21,16 @@ const ExternalEnvironmentalConditions: FC = () => {
   console.log(externalEnvironmentData);
   return (
     <GridItemWraper>
-      <div className='measurement-container'>
+      <div className='measurement-container max-h-full overflow-y-auto'>
         <MeasurementComponent name='External Environmental Conditions' />
 
+<<<<<<< HEAD
         <div className='flex flex-wrap justify-between'>
           <div className='mb-6 w-1/2'>
+=======
+        <div className='flex flex-wrap  w-full justify-between '>
+          <div className='mb-6'>
+>>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Air Quality
             </h3>
@@ -53,18 +58,29 @@ const ExternalEnvironmentalConditions: FC = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className='flex flex-wrap justify-between'>
           <div className='mb-6 w-1/2'>
+=======
+        <div className='flex flex-wrap  w-full justify-between w-full'>
+          <div className='mb-6 '>
+>>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Water Quality
             </h3>
             <ul>
-              <li>Water Temperature: {waterQuality.waterTemperature} °C</li>
+              <li>Temperature: {waterQuality.waterTemperature} °C</li>
               <li>pH: {waterQuality.pH}</li>
               <li>Dissolved Oxygen: {waterQuality.dissolvedOxygen} mg/L</li>
+<<<<<<< HEAD
               <li>Nitrate : {waterQuality.nitrateConcentration} mg/L</li>
               <li>Phosphate : {waterQuality.phosphateConcentration} mg/L</li>
               <li>Mercury Level: {waterQuality.mercuryLevel} µg/L</li>
+=======
+              <li>Nitrate: {waterQuality.nitrateConcentration} mg/L</li>
+              <li>Phosphate: {waterQuality.phosphateConcentration} mg/L</li>
+              <li>Mercury: {waterQuality.mercuryLevel} µg/L</li>
+>>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
             </ul>
           </div>
 
@@ -73,13 +89,9 @@ const ExternalEnvironmentalConditions: FC = () => {
               Resource Usage
             </h3>
             <ul>
-              <li>
-                Water Consumption: {resourceUsage.waterConsumption} m³/day
-              </li>
-              <li>
-                Energy Consumption: {resourceUsage.energyConsumption} MWh/month
-              </li>
-              <li>Waste Generation: {resourceUsage.wasteGeneration} kg/day</li>
+              <li>Water : {resourceUsage.waterConsumption} m³/day</li>
+              <li>Energy : {resourceUsage.energyConsumption} MWh/month</li>
+              <li>W. Generation: {resourceUsage.wasteGeneration} kg/day</li>
               <li>Land Use Change: {resourceUsage.landUseChange} acres/year</li>
             </ul>
           </div>

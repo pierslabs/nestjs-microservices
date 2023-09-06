@@ -6,7 +6,7 @@ export interface GridItemWraperProps {
 
 const GridItemWraper: FC<GridItemWraperProps> = ({ children }) => {
   return (
-    <div className='border w-full h-full p-5 overflow-hidden'>{children}</div>
+    <div className='w-full h-full p-5 btn-gradient-1 bg-black'>{children}</div>
   );
 };
 
