@@ -1,18 +1,31 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import MeasurementComponent from '../measurement/Measurement';
 import GridItemWraper from '../../common/gridItemWrappr/GridItemWraper';
-import { externalEnvironmentData } from '../../../config/fakeData/fakeData';
+import useMqtt from '../../../hooks/mqtt/useMqtt';
 
 const ExternalEnvironmentalConditions: FC = () => {
-  const { airQuality, weather, waterQuality, resourceUsage } =
-    externalEnvironmentData;
+  const { data } = useMqtt({
+    subscription: 'externalEnvironmentalConditions-out',
+  });
+
+  const [externalEnvironmentData, setExternalEnvironmentData] = useState();
+
+  useEffect(() => {
+    if (data?.pattern === 'externalEnvironmentalConditions-out') {
+      setExternalEnvironmentData(
+        data.data as unknown as typeof externalEnvironmentData
+      );
+    }
+  }, [data]);
+
+  console.log(externalEnvironmentData);
   return (
     <GridItemWraper>
       <div className='measurement-container'>
         <MeasurementComponent name='External Environmental Conditions' />
 
-        <div className='flex flex-wrap justify-evenly'>
-          <div className='mb-6'>
+        <div className='flex flex-wrap justify-between'>
+          <div className='mb-6 w-1/2'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Air Quality
             </h3>
@@ -25,7 +38,7 @@ const ExternalEnvironmentalConditions: FC = () => {
               <li>AQI: {airQuality.aqi}</li>
             </ul>
           </div>
-          <div className='mb-6 '>
+          <div className='mb-6 w-1/2'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Weather
             </h3>
@@ -40,8 +53,8 @@ const ExternalEnvironmentalConditions: FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-wrap justify-evenly gap-9'>
-          <div className='mb-6'>
+        <div className='flex flex-wrap justify-between'>
+          <div className='mb-6 w-1/2'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Water Quality
             </h3>
@@ -49,17 +62,13 @@ const ExternalEnvironmentalConditions: FC = () => {
               <li>Water Temperature: {waterQuality.waterTemperature} °C</li>
               <li>pH: {waterQuality.pH}</li>
               <li>Dissolved Oxygen: {waterQuality.dissolvedOxygen} mg/L</li>
-              <li>
-                Nitrate Concentration: {waterQuality.nitrateConcentration} mg/L
-              </li>
-              <li>
-                Phosphate Concentration: {waterQuality.phosphateConcentration}{' '}
-                mg/L
-              </li>
+              <li>Nitrate : {waterQuality.nitrateConcentration} mg/L</li>
+              <li>Phosphate : {waterQuality.phosphateConcentration} mg/L</li>
               <li>Mercury Level: {waterQuality.mercuryLevel} µg/L</li>
             </ul>
           </div>
-          <div>
+
+          <div className='mb-6 w-1/2'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Resource Usage
             </h3>

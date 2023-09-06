@@ -33,7 +33,7 @@ export class NuclearReactorService {
     });
   }
 
-  @Cron('*/2 * * * * *')
+  @Cron('*/5 * * * * *')
   airFlowVentilationCron() {
     this.airFlowVentilation();
   }
@@ -49,7 +49,7 @@ export class NuclearReactorService {
       console.log(`Response coolingSytem output: < ${res} >`);
     });
   }
-  @Cron('* * * * * *')
+  @Cron('*/10 * * * * *')
   coolingSytemCron() {
     this.coolingSytem();
   }
@@ -71,8 +71,60 @@ export class NuclearReactorService {
       });
   }
 
-  @Cron('*/7 * * * * *')
+  @Cron('*/23 * * * * *')
   radioactiveContaminationCron() {
     this.radioactiveContamination();
+  }
+
+  externaEnvironmentalConditions() {
+    const externalEnvironmentalConditions = {
+      airQuality: {
+        co2: randomUnits(200, 400, 'ppb'),
+        so2: randomUnits(1, 5, 'ppb'),
+        nox: randomUnits(5, 15, 'ppb'),
+        pm25: randomUnits(10, 20, 'µg/m³'),
+        o3: randomUnits(30, 40, 'ppb'),
+        aqi: 'Moderate',
+      },
+      weather: {
+        temperature: randomUnits(20, 25, '°C'),
+        humidity: randomUnits(60, 70, '%'),
+        precipitation: randomUnits(0, 0.5, 'inches'),
+        windSpeed: randomUnits(10, 15, 'mph'),
+        atmosphericPressure: randomUnits(905, 1015, 'hPa'),
+        solarRadiation: randomUnits(700, 750, 'W/m²'),
+      },
+      waterQuality: {
+        waterTemperature: randomUnits(20, 25, '°C'),
+        pH: randomUnits(7.5, 8.8, 'pH'),
+        dissolvedOxygen: randomUnits(8, 10, 'mg/L'),
+        nitrateConcentration: randomUnits(5, 10, 'mg/L'),
+        phosphateConcentration: randomUnits(5, 10, 'mg/L'),
+        mercuryLevel: randomUnits(0.5, 1, 'µg/L'),
+      },
+      resourceUsage: {
+        waterConsumption: randomUnits(9000, 10000, 'm³/day'),
+        energyConsumption: randomUnits(1000, 1500, 'MWh/day'),
+        wasteGeneration: randomUnits(100, 200, 'kg/day'),
+        landUseChange: randomUnits(0.5, 1, 'acres/day'),
+      },
+    };
+
+    const record = new MqttRecordBuilder(externalEnvironmentalConditions)
+      .setQoS(1)
+      .build();
+    this.client
+      .send('externalEnvironmentalConditions-out', record)
+      .subscribe((res) => {
+        console.log(
+          `Response externalEnvironmentalConditions output: < ${res} >`,
+        );
+      });
+  }
+
+  @Cron('* * * * * *')
+  externaEnvironmentalConditionsCron() {
+    console.log('externaEnvironmentalConditionsCron');
+    this.externaEnvironmentalConditions();
   }
 }

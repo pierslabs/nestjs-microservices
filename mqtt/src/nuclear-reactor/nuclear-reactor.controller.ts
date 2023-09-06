@@ -90,4 +90,23 @@ export class NuclearReactorController {
     this.logger.log(`Packet: `, context.getPacket());
     return `response from logRadioactiveContamination() in -t ${context.getTopic()}`;
   }
+
+  @MessagePattern('externaEnvironmentalConditions')
+  externaEnvironmentalConditions(@Ctx() context: MqttContext) {
+    this.logger.log(
+      `NEW MESSAGE RECEIVED FROM NUCLEAR-REACTOR: ${context.getTopic()}`,
+    );
+    this.logger.log(`context: `, context.getPacket());
+    return this.nuclearReactorService.externaEnvironmentalConditions();
+  }
+
+  @MessagePattern('externalEnvironmentalConditions-out')
+  logExternaEnvironmentalConditions(
+    @Payload() payload: string,
+    @Ctx() context: MqttContext,
+  ) {
+    this.logger.log(`NEW MESSAGE RECEIVED: ${context.getTopic()}`);
+    this.logger.log(`payload: ${payload}`);
+    return `response from logExternaEnvironmentalConditions() in -t ${context.getTopic()}`;
+  }
 }
