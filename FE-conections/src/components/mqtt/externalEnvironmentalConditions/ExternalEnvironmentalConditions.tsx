@@ -8,8 +8,58 @@ const ExternalEnvironmentalConditions: FC = () => {
     subscription: 'externalEnvironmentalConditions-out',
   });
 
-  const [externalEnvironmentData, setExternalEnvironmentData] = useState();
+  const [externalEnvironmentData, setExternalEnvironmentData] = useState({
+    airQuality: {
+      co2: 0,
+      so2: 0,
+      nox: 0,
+      pm25: 0,
+      o3: 0,
+      aqi: 0,
+    },
+    weather: {
+      temperature: 0,
+      humidity: 0,
+      precipitation: 0,
+      windSpeed: 0,
+      atmosphericPressure: 0,
+      solarRadiation: 0,
+    },
+    waterQuality: {
+      waterTemperature: 0,
+      pH: 0,
+      dissolvedOxygen: 0,
+      nitrateConcentration: 0,
+      phosphateConcentration: 0,
+      mercuryLevel: 0,
+    },
+    resourceUsage: {
+      waterConsumption: 0,
+      energyConsumption: 0,
+      wasteGeneration: 0,
+      landUseChange: 0,
+    },
+  });
 
+  const airQuality = externalEnvironmentData?.airQuality || {
+    co2: { unit: 'ppb', value: 0 },
+    so2: { unit: 'ppb', value: 0 },
+    nox: { unit: 'ppb', value: 0 },
+    pm25: { unit: 'µg/m³', value: 0 },
+    o3: { unit: 'ppb', value: 0 },
+    aqi: 'Unknown', // o un valor por defecto apropiado
+  };
+
+  const weather = externalEnvironmentData?.weather || {
+    temperature: { unit: '°C', value: 0 },
+    humidity: { unit: '%', value: 0 },
+    precipitation: { unit: 'inches', value: 0 },
+    windSpeed: { unit: 'mph', value: 0 },
+    atmosphericPressure: { unit: 'hPa', value: 0 },
+    solarRadiation: { unit: 'W/m²', value: 0 },
+  };
+
+  console.log(data);
   useEffect(() => {
     if (data?.pattern === 'externalEnvironmentalConditions-out') {
       setExternalEnvironmentData(
@@ -18,81 +68,72 @@ const ExternalEnvironmentalConditions: FC = () => {
     }
   }, [data]);
 
-  console.log(externalEnvironmentData);
   return (
     <GridItemWraper>
       <div className='measurement-container max-h-full overflow-y-auto'>
         <MeasurementComponent name='External Environmental Conditions' />
 
-<<<<<<< HEAD
         <div className='flex flex-wrap justify-between'>
           <div className='mb-6 w-1/2'>
-=======
-        <div className='flex flex-wrap  w-full justify-between '>
-          <div className='mb-6'>
->>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Air Quality
             </h3>
             <ul>
-              <li>CO2: {airQuality.co2} ppm</li>
-              <li>SO2: {airQuality.so2} ppb</li>
-              <li>NOx: {airQuality.nox} ppb</li>
-              <li>PM2.5: {airQuality.pm25} µg/m³</li>
-              <li>O3: {airQuality.o3} ppb</li>
-              <li>AQI: {airQuality.aqi}</li>
+              <li className='m-2'>
+                CO2: {Number(airQuality.co2?.value).toFixed(3)}{' '}
+                {airQuality.co2?.unit}
+              </li>
+              <li className='m-2'>
+                SO2: {Number(airQuality.so2?.value).toFixed(3)}{' '}
+                {airQuality.so2?.unit}
+              </li>
+              <li className='m-2'>
+                NOx: {Number(airQuality.nox?.value).toFixed(3)}{' '}
+                {airQuality.nox?.unit}
+              </li>
+              <li className='m-2'>
+                PM2.5: {Number(airQuality.pm25?.value).toFixed(3)}{' '}
+                {airQuality.pm25?.unit}
+              </li>
+              <li className='m-2'>
+                O3: {Number(airQuality.o3?.value).toFixed(3)}{' '}
+                {airQuality.o3?.unit}
+              </li>
+              <li className='m-2'>AQI: {airQuality.aqi}</li>
             </ul>
           </div>
+
           <div className='mb-6 w-1/2'>
             <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
               Weather
             </h3>
             <ul>
-              <li>Temperature: {weather.temperature} °C</li>
-              <li>Humidity: {weather.humidity}%</li>
-              <li>Precipitation: {weather.precipitation} inches</li>
-              <li>Wind Speed: {weather.windSpeed} mph</li>
-              <li>Atmospheric Pressure: {weather.atmosphericPressure} hPa</li>
-              <li>Solar Radiation: {weather.solarRadiation} W/m²</li>
-            </ul>
-          </div>
-        </div>
-
-<<<<<<< HEAD
-        <div className='flex flex-wrap justify-between'>
-          <div className='mb-6 w-1/2'>
-=======
-        <div className='flex flex-wrap  w-full justify-between w-full'>
-          <div className='mb-6 '>
->>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
-            <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
-              Water Quality
-            </h3>
-            <ul>
-              <li>Temperature: {waterQuality.waterTemperature} °C</li>
-              <li>pH: {waterQuality.pH}</li>
-              <li>Dissolved Oxygen: {waterQuality.dissolvedOxygen} mg/L</li>
-<<<<<<< HEAD
-              <li>Nitrate : {waterQuality.nitrateConcentration} mg/L</li>
-              <li>Phosphate : {waterQuality.phosphateConcentration} mg/L</li>
-              <li>Mercury Level: {waterQuality.mercuryLevel} µg/L</li>
-=======
-              <li>Nitrate: {waterQuality.nitrateConcentration} mg/L</li>
-              <li>Phosphate: {waterQuality.phosphateConcentration} mg/L</li>
-              <li>Mercury: {waterQuality.mercuryLevel} µg/L</li>
->>>>>>> 828c88a281412f71a38e34f59f80017d0ec04f08
-            </ul>
-          </div>
-
-          <div className='mb-6 w-1/2'>
-            <h3 className='text-lg font-semibold mb-2 text-indigo-500'>
-              Resource Usage
-            </h3>
-            <ul>
-              <li>Water : {resourceUsage.waterConsumption} m³/day</li>
-              <li>Energy : {resourceUsage.energyConsumption} MWh/month</li>
-              <li>W. Generation: {resourceUsage.wasteGeneration} kg/day</li>
-              <li>Land Use Change: {resourceUsage.landUseChange} acres/year</li>
+              <li className='m-2'>
+                Temperature: {Number(weather.temperature?.value).toFixed(3)}
+                {weather.temperature?.unit}
+              </li>
+              <li className='m-2'>
+                Humidity: {Number(weather.humidity?.value).toFixed(3)}{' '}
+                {weather.humidity?.unit}
+              </li>
+              <li className='m-2'>
+                Precipitation: {Number(weather.precipitation?.value).toFixed(3)}{' '}
+                {weather.precipitation?.unit}
+              </li>
+              <li className='m-2'>
+                Wind Speed: {Number(weather.windSpeed?.value).toFixed(3)}{' '}
+                {weather.windSpeed?.unit}
+              </li>
+              <li className='m-2'>
+                Atmospheric Pressure:{' '}
+                {Number(weather.atmosphericPressure?.value).toFixed(3)}{' '}
+                {weather.atmosphericPressure?.unit}
+              </li>
+              <li className='m-2'>
+                Solar Radiation:{' '}
+                {Number(weather.solarRadiation?.value).toFixed(3)}{' '}
+                {weather.solarRadiation?.unit}
+              </li>
             </ul>
           </div>
         </div>
